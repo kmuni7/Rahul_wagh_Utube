@@ -1,0 +1,15 @@
+code - terraform
+
+provider "aws" {
+  region     = "eu-west-2"
+  access_key = "AKIATITEO35FONPVOULW"
+  secret_key = "+vo7j0vLJHHD+9/p3PV5PSomYce49whYaj1/giBJ"
+}
+
+resource "aws_instance" "ec2_example" {
+    ami = "ami-08152f04c5fe67b24"
+    instance_type = "t2.micro"
+    tags = {
+        Name = "Terraform EC2"
+    }
+}

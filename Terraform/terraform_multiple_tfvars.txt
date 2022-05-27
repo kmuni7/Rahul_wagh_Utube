@@ -1,0 +1,49 @@
+here can be situation where you need create multiple tfvars files based on the environment like stage, production.
+
+So in such scenario you can create one tfvars file for each environment -
+
+stage.tfvars
+production.tfvars
+
+1. First Create your main.tf
+
+provider "aws" {
+   region     = "eu-central-1"
+   access_key = "AKIATQ37NXB2AYK7R6PQ"
+   secret_key = "S1Yg1Qm2JNSej8EHdhPTiu5l5ZD36URsedf32kNT"
+}
+resource "aws_instance" "ec2_example" {
+
+   ami           = "ami-0767046d1677be5a0"
+   instance_type =  var.instance_type
+
+  tags = {
+           Name = var.environment_name
+   }
+
+} 
+
+2. Second create your variable.tf
+
+variable "instance_type" {
+}
+
+variable "environment_name" {
+}
+
+3. And third create your stage.tfvars for staging
+
+instance_type="t2.micro"
+
+environment_name ="stage" 
+
+4.And third create your production.tfvars for production
+
+instance_type="t2.micro"
+
+environment_name ="production" 
+
+
+
+
+execute the files with commands
